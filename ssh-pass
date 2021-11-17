@@ -1,0 +1,35 @@
+#!/usr/bin/env bash
+
+url=$1
+
+invalid_arguments()
+{
+	echo "Usage: $0 ssh://[user[:pass]]@host:port" 1>&2
+	exit 1
+}
+
+[ -z "$url" ] && invalid_arguments
+
+url="${url#*ssh://}"
+url="${url%/*}"
+
+credentials="${url%@*}"
+address="${url#*@}"
+
+host="${address%:*}"
+port="${address#*:}"
+
+[ -z "$host" ] && invalid_arguments
+
+port="${port:-22}"
+
+user="${credentials%:*}"
+pass="${credentials#*:}"
+
+if [ -z "$pass" ]
+then
+	[-z "$user"] && ssh -p "$port" "$host" || ssh -p "$port" "$user@$host"
+else
+	[ -z "$user" ] && invalid_arguments
+	pass.exp "$pass" ssh -p "$port" "$user@$host" "$cmd"
+fi

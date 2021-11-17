@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Name=SSH
+Type=Application
+Icon=utilities-terminal
+Exec=$TERM_EMULATOR ssh-pass %u
+StartupNotify=true
+Terminal=false
+MimeType=x-scheme-handler/ssh;
