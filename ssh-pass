@@ -26,6 +26,9 @@ port="${port:-22}"
 user="${credentials%:*}"
 pass="${credentials#*:}"
 
+# Set TERM=xterm if using alacritty or termite
+[ "$TERM" = alacritty -o "$TERM" = "xterm-termite" ] && TERM=xterm
+
 if [ -z "$pass" ]
 then
 	[-z "$user"] && ssh -p "$port" "$host" || ssh -p "$port" "$user@$host"
