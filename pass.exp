@@ -23,7 +23,7 @@ eval spawn $cmd
 expect_before { timeout { puts "Unable to access the host"; exit 1 } }
 
 # Disable output before interaction
-#log_user 0
+log_user 0
 
 expect {
 	eof { puts "Connection rejected by the host"; exit 2 }
