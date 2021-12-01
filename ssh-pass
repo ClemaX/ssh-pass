@@ -17,11 +17,9 @@ credentials="${url%@*}"
 address="${url#*@}"
 
 host="${address%:*}"
-port="${address#*:}"
+[ "$host" = "$address" ] && port=22 || port="${address#*:}"
 
 [ -z "$host" ] && invalid_arguments
-
-port="${port:-22}"
 
 user="${credentials%:*}"
 pass="${credentials#*:}"
