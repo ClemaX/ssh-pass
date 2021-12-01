@@ -29,8 +29,8 @@ pass="${credentials#*:}"
 
 if [ -z "$pass" ]
 then
-	[-z "$user"] && ssh -p "$port" "$host" || ssh -p "$port" "$user@$host"
+	[-z "$user"] && ssh -o "UserKnownHostsFile=/dev/null" -p "$port" "$host" || ssh -p "$port" "$user@$host"
 else
 	[ -z "$user" ] && invalid_arguments
-	pass.exp "$pass" ssh -p "$port" "$user@$host" "$cmd"
+	pass.exp "$pass" ssh -o "UserKnownHostsFile=/dev/null" -p "$port" "$user@$host" "$cmd"
 fi
